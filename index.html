@@ -1,0 +1,63 @@
+<html><head><base href="https://example.com/countdown-white/">
+  <title>Countdown Clock - White Background</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: white;
+    }
+    #clock {
+      font-size: 3rem;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      background-color: #f8f8f8;
+    }
+    .unit {
+      display: inline-block;
+      margin: 0 10px;
+    }
+    .number {
+      font-weight: bold;
+      color: #2980b9;
+    }
+    .label {
+      font-size: 1rem;
+      color: #7f8c8d;
+      display: block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="clock"></div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const future = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 12); // 12 days from now
+      const diff = future - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('clock').innerHTML = 
+        `<div class="unit"><span class="number">${days}</span><span class="label">days</span></div>` +
+        `<div class="unit"><span class="number">${hours}</span><span class="label">hours</span></div>` +
+        `<div class="unit"><span class="number">${minutes}</span><span class="label">minutes</span></div>` +
+        `<div class="unit"><span class="number">${seconds}</span><span class="label">seconds</span></div>`;
+    }
+
+    updateClock(); // Initial call
+    setInterval(updateClock, 1000); // Update every second
+  </script>
+</body>
+</html>
